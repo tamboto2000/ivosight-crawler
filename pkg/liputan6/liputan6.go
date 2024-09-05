@@ -11,6 +11,8 @@ import (
 
 const UserAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
 
+const liputanIndex = "https://www.liputan6.com/indeks"
+
 type Liputan6 struct {
 	cl *http.Client
 }
@@ -26,6 +28,11 @@ func NewLiputan6(cl *http.Client) *Liputan6 {
 func (lpt6 *Liputan6) ArticleListFromLink(ctx context.Context, link string) ([]*ArticleListItem, error) {
 	parser := new(articleListParser)
 	return parser.parseArticleList(ctx, lpt6, link)
+}
+
+func (lpt6 *Liputan6) ArticleListFromIndex(ctx context.Context) ([]*ArticleListItem, error) {
+	parser := new(articleListParser)
+	return parser.parseArticleList(ctx, lpt6, liputanIndex)
 }
 
 func (lpt6 *Liputan6) ArticleFromLink(ctx context.Context, link string) (Article, error) {

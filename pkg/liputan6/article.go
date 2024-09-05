@@ -36,6 +36,24 @@ type ArticleContent struct {
 	Data any
 }
 
+func (ct ArticleContent) String() string {
+	str, ok := ct.Data.(string)
+	if !ok {
+		panic("not a string")
+	}
+
+	return str
+}
+
+func (ct ArticleContent) Image() ContentImage {
+	img, ok := ct.Data.(ContentImage)
+	if !ok {
+		panic("not an image")
+	}
+
+	return img
+}
+
 type jsonScript struct {
 	Author *struct {
 		Name string `json:"name"`
